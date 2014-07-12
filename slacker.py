@@ -1,10 +1,13 @@
 import pycurl, json, base64, StringIO, sys
+import ConfigParser, os
 
 class Slack:
 	def __init__(self):
-		self.domain=''
-		self.token=''
-		
+		settings = ConfigParser.ConfigParser()
+		settings.read('settings.ini')
+		self.domain = settings.get('settings', 'domain')
+		self.token = settings.get('settings', 'token')
+
 	def post(self,channel='dev', text='--', username='Slacker',icon_url='http://hs.findingapogee.com/publicfiles/fahomei.png'):
 		payload = {
 			"channel":"#" + channel,
