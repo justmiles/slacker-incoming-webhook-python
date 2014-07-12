@@ -4,7 +4,8 @@ import ConfigParser, os
 class Slack:
 	def __init__(self):
 		settings = ConfigParser.ConfigParser()
-		settings.read('settings.ini')
+		current_dir = os.path.dirname(os.path.realpath(__file__))
+		settings.read(current_dir + '/settings.ini')
 		self.domain = settings.get('settings', 'domain')
 		self.token = settings.get('settings', 'token')
 
@@ -58,5 +59,3 @@ else:
 	usage()
 	
 print bam.response
-
-
